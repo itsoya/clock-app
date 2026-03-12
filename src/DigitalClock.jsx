@@ -7,9 +7,13 @@ function DigitalClock() {
         const timer = setInterval(() => {
             setTime(new Date());
         }, 1000);
-
         return () => clearInterval(timer);
     }, []);
+
+    useEffect(() => {
+        document.title = `Elapsed time: ${formatTime(time)}`;
+    }, [time]); // This effect depends on 'time' and runs whenever it updates
+
 
     function formatTime(date) {
         let hours = String(date.getHours()).padStart(2, '0');
